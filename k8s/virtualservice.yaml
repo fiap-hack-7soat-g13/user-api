@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: user-api
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - hack-g13
+  http:
+    - match:
+        - uri:
+            exact: /user
+        - uri:
+            prefix: /user/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: user-api.default.svc.cluster.local
+            port:
+              number: 80
