@@ -6,7 +6,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - hack-g13
+    - default
   http:
     - match:
         - uri:
