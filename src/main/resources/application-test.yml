@@ -5,7 +5,3 @@ spring:
   flyway:
     clean-disabled: false
     clean-on-validation-error: true
-
-application:
-  cognito:
-    userPoolId: us-east-1_123
