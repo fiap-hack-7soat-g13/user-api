@@ -4,6 +4,7 @@ import com.fiap.challenge.user.app.adapter.input.web.dto.UserRequest;
 import com.fiap.challenge.user.app.adapter.input.web.dto.UserResponse;
 import com.fiap.challenge.user.app.adapter.input.web.mapper.UserRequestMapper;
 import com.fiap.challenge.user.app.adapter.input.web.mapper.UserResponseMapper;
+import com.fiap.challenge.user.common.JwtTokenUtil;
 import com.fiap.challenge.user.core.domain.User;
 import com.fiap.challenge.user.core.usecases.user.UserCreateUseCase;
 import com.fiap.challenge.user.core.usecases.user.UserGetUseCase;
@@ -25,6 +26,7 @@ public class UserController {
     private final UserListUseCase userListUseCase;
     private final UserRequestMapper userRequestMapper;
     private final UserResponseMapper userResponseMapper;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -49,6 +51,19 @@ public class UserController {
     public List<UserResponse> list(@RequestParam(required = false) String document) {
         List<User> userList = userListUseCase.execute(document);
         return userResponseMapper.toUser(userList);
+    }
+
+    @GetMapping("/token/{id}")
+    public String getAuthentication(@PathVariable Long id) {
+        User user = userGetUseCase.execute(id);
+        String jwt;
+        try {
+            jwt = jwtTokenUtil.generateJwtToekn(user);
+
+            return String.format("Bearer %s", jwt);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao gerar token");
+        }
     }
 
 }
