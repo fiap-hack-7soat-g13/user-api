@@ -9,7 +9,7 @@ spring:
     username: postgres
     password: postgres
     hikari:
-      schema=schema:
+      schema: public
   jpa:
     database: POSTGRESQL
     show-sql: true
@@ -41,3 +41,6 @@ spring:
       ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+jwt:
+  secret: ${JWT_SECRET:fiaphackathonpaymentsystem}
