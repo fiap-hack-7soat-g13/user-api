@@ -10,7 +10,6 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -45,10 +44,7 @@ public class UserGatewayImpl implements UserGateway {
     }
 
     public void removeById(Long id) {
-        UserEntity userEntity = repository.findById(id).isPresent() ? repository.findById(id).get() : null;
-        if (userEntity == null)
-            throw new EntityNotFoundException();
-
+        UserEntity userEntity = repository.findById(id).orElseThrow(EntityNotFoundException::new);
         repository.delete(userEntity);
     }
 

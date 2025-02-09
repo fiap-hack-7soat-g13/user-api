@@ -23,13 +23,6 @@
 		<sonar.organization>fiap-hack-7soat-g13</sonar.organization>
 		<sonar.projectKey>fiap-hack-7soat-g13_user-api</sonar.projectKey>
 		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
-		<sonar.coverage.exclusions>
-			**/*Config.java,
-			**/*Entity.java,
-			**/*Mock.java,
-			**/*Request.java,
-			**/*Response.java
-		</sonar.coverage.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
