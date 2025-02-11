@@ -7,7 +7,9 @@ import com.fiap.challenge.user.core.gateways.UserGateway;
 import com.fiap.challenge.user.core.usecases.user.UserCreateUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
@@ -17,14 +19,16 @@ import static org.mockito.Mockito.when;
 
 public class UserCreateUseCaseTest {
 
+	@Mock
 	private UserGateway userGateway;
+	@Mock
 	private UserCreateValidator validator;
+
 	private UserCreateUseCase userCreateUseCase;
 
 	@BeforeEach
 	void setUp() {
-		userGateway = Mockito.mock(UserGateway.class);
-		validator = Mockito.mock(UserCreateValidator.class);
+		MockitoAnnotations.openMocks(this);
 		userCreateUseCase = new UserCreateUseCase(userGateway, validator);
 	}
 
