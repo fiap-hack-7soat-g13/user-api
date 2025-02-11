@@ -7,12 +7,9 @@ import com.fiap.challenge.user.core.gateways.UserGateway;
 import com.fiap.challenge.user.core.usecases.user.UserCreateUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
@@ -20,16 +17,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 public class UserCreateUseCaseTest {
 
 	@Mock
 	private UserGateway userGateway;
 	@Mock
 	private UserCreateValidator validator;
-
-	@InjectMocks
 	private UserCreateUseCase userCreateUseCase;
+
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+//		userGateway = Mockito.mock(UserGateway.class);
+//		validator = Mockito.mock(UserCreateValidator.class);
+		userCreateUseCase = new UserCreateUseCase(userGateway, validator);
+	}
 
 	@Test
 	void executeWithValidUser() {
