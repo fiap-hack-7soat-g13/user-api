@@ -8,6 +8,7 @@ import com.fiap.challenge.user.core.usecases.user.UserCreateUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -27,13 +28,8 @@ public class UserCreateUseCaseTest {
 	@Mock
 	private UserCreateValidator validator;
 
+	@InjectMocks
 	private UserCreateUseCase userCreateUseCase;
-
-	@BeforeEach
-	void setUp() {
-		MockitoAnnotations.openMocks(this);
-		userCreateUseCase = new UserCreateUseCase(userGateway, validator);
-	}
 
 	@Test
 	void executeWithValidUser() {
